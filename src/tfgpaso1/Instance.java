@@ -19,6 +19,7 @@ import java.util.Scanner;
  */
 public class Instance {
     
+    private RandomManager rnd;
     private String instance_name;
     private int count_nodes;
     private float node_percentage;
@@ -174,7 +175,7 @@ public class Instance {
                         cosa.add(n3);
                     }
                 }
-                i = i + this.terminal_nodes.size()-1 - cosa.size();
+                i = i + this.terminal_nodes.size()- 1 - cosa.size();
                 System.out.print("");
             }
         }
@@ -198,8 +199,8 @@ public class Instance {
         return conj;
     }
     
-    public Nodo activarGenerador(){
-        int num = (int) (Math.random() * this.regenerator_nodes.length+1);
+    public Nodo activarGenerador(){ //hacerlo con new Random(); 
+        int num = RandomManager.getRandom();
         Nodo n = this.regenerator_nodes[num-1];
         if (n.isTerminal()){
             n.setTerminal(false);

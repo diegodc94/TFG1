@@ -5,9 +5,16 @@
  */
 package tfgpaso1;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRichTextString;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook; 
+import org.apache.poi.ss.usermodel.Cell;
 
 /**
  *
@@ -49,6 +56,7 @@ public class TFGPaso1 {
 //        System.out.println(g.adyacentes(n1));
 
         Instance grafo = new Instance(ruta);
+        RandomManager.setSeed(1234);
         System.out.println("La ruta a imprimir es: " + grafo.toString());
         System.out.println(grafo.getList_nodos()[2]);
         int i = 1;
@@ -77,7 +85,22 @@ public class TFGPaso1 {
 //   
 //        System.out.println(grafo.obtenerAdyacentesDir(n));
         
-
+        HSSFWorkbook libro = new HSSFWorkbook();
+        HSSFSheet hoja = libro.createSheet();
+        HSSFRow fila = hoja.createRow(0);
+        HSSFCell celda = fila.createCell((short) 0);
+        
+        HSSFRichTextString texto = new HSSFRichTextString("hola mundo");
+        celda.setCellValue(texto);
+        
+        try {
+            FileOutputStream elFichero = new FileOutputStream("holamundo.xls");
+            libro.write(elFichero);
+            elFichero.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        
     }
     
 
